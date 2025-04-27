@@ -111,7 +111,7 @@ const ProjectDetail = () => {
   
   return (
     <div className="bg-gradient-to-r from-blue-100 to-purple-100 py-16 min-h-screen">
-      <div className="max-w-6xl mx-auto px-4">
+           <div className="max-w-6xl mx-auto px-4">
         <Link to="/projects" className="text-blue-600 hover:underline flex items-center mb-6">
           <ArrowLeft className="mr-2" size={18} /> Back to Projects
         </Link>
@@ -120,7 +120,21 @@ const ProjectDetail = () => {
           <img src={project.image} alt={project.title} className="w-full h-80 object-cover" />
           
           <div className="p-8">
-            <h1 className="text-3xl font-bold mb-4">{project.title}</h1>
+            <div className="flex justify-between items-center mb-4">
+              <h1 className="text-3xl font-bold">{project.title}</h1>
+              
+              {project.githubLink && (
+                <a 
+                  href={project.githubLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="bg-gray-800 text-white p-3 rounded-full hover:bg-gray-900 transition-colors flex items-center"
+                >
+                  <Github size={20} />
+                  <span className="ml-2 hidden md:inline">View on GitHub</span>
+                </a>
+              )}
+            </div>
             
             <div className="flex flex-wrap gap-2 mb-6">
               {project.tech.map((tech, index) => (
