@@ -55,7 +55,7 @@ const Home = () => {
           <div className="flex justify-center fade-in">
             <div className="w-80 h-80 rounded-full bg-blue-300 border-4 border-white overflow-hidden shadow-xl">
               {/* Larger profile image */}
-              <img src="src/assets/IMG-20250214-WA0072.jpg" alt="Inigashree" className="w-full h-full object-cover" />
+              <img src="/images/IMG-20250214-WA0072.jpg" alt="Inigashree" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@ const projectsData = [
     title: 'Smart Spectacles',
     description: 'A wearable assistive device utilizing ultrasonic sensors to help visually impaired individuals navigate obstacles.',
     tech: ['Embedded C++', 'Arduino IDE', 'Ultrasonic Sensor'],
-    image: 'src/assets/glasses.jpg',
+    image: '/images/glasses.jpg',
     achievements: ['2nd place in Project Expo at KEC (2023 & 2024)']
   },
   {
@@ -15,7 +15,7 @@ const projectsData = [
     title: 'Weather App',
     description: 'A weather monitoring application with real-time weather updates based on geolocation.',
     tech: ['ReactJS', 'Tailwind CSS', 'OpenWeatherMap API'],
-    image: 'src/assets/picture2.jpg',
+    image: '/images/picture2.jpg',
     achievements: ['Engineered an intuitive and dynamic UI displaying real-time weather data']
   },
   {
@@ -23,7 +23,7 @@ const projectsData = [
     title: "Farmer's Ease App",
     description: 'An agricultural management system with transportation tracking features for farmers and customers.',
     tech: ['HTML', 'CSS', 'Python', 'MySQL'],
-    image: 'src/assets/picture1.jpg',
+    image: '/images/picture1.jpg',
     achievements: ['Implemented customer signup and login system with seamless data retrieval']
   }
 ];

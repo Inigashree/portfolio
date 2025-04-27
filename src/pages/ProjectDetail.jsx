@@ -21,7 +21,7 @@ const projectsData = [
       practical application and social impact.
     `,
     tech: ['Embedded C++', 'Arduino IDE', 'Ultrasonic Sensor', 'Haptic Feedback', 'Power Management'],
-    image: '/glasses.jpg',
+    image: '/images/glasses.jpg',
     achievements: ['2nd place in Project Expo at KEC (2023)', '2nd place in Project Expo at KEC (2024)'],
     features: [
       'Real-time obstacle detection',
@@ -50,7 +50,7 @@ const projectsData = [
       visualizations using interactive charts.
     `,
     tech: ['ReactJS', 'Tailwind CSS', 'OpenWeatherMap API', 'Geolocation API', 'Chart.js'],
-    image: '/picture2.jpg',
+    image: '/images/picture2.jpg',
     achievements: ['Engineered an intuitive and dynamic UI displaying real-time weather data'],
     features: [
       'Real-time weather updates',
@@ -78,7 +78,7 @@ const projectsData = [
       ensure that user data remains secure while providing a seamless experience.
     `,
     tech: ['HTML', 'CSS', 'Python', 'MySQL', 'Geolocation Tracking'],
-    image: '/picture1.jpg',
+    image: '/images/picture1.jpg',
     achievements: ['Implemented customer signup and login system with seamless data retrieval'],
     features: [
       'Farmer product listing and management',
