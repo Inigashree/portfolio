@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     // Initialize Typed.js
     const typed = new Typed(typedTextRef.current, {
-      strings: ['CSE Student','Full Stack Developer','Tech Enthusiast'],
+      strings: ['Computer Science Engineer','Full Stack Developer','Tech Enthusiast'],
       typeSpeed: 80,
       backSpeed: 50,
       backDelay: 1500,
@@ -48,7 +48,7 @@ const Home = () => {
                 download="Inigashree_Resume.pdf" 
                 className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg font-medium flex items-center"
               >
-                Download CV <Download className="ml-2" size={18} />
+                Resume <Download className="ml-2" size={18} />
               </a>
             </div>
           </div>
