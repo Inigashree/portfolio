@@ -1,6 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const form = useRef();
@@ -13,6 +12,24 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // Load EmailJS from CDN
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+    script.async = true;
+    script.onload = () => {
+      window.emailjs.init("1Z53ZdDy9gjzYVkHF"); // Your public key
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,13 +43,36 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading(true);
     setIsError(false);
+    setErrorMessage('');
     
-    // Using EmailJS to send emails
-    emailjs.sendForm(
-      'service_xo0haiu', // Replace with your EmailJS service ID
-      'template_31yrh3f', // Replace with your EmailJS template ID
-      form.current,
-      '1Z53ZdDy9gjzYVkHF' // Replace with your EmailJS public key
+    if (!window.emailjs) {
+      setIsError(true);
+      setErrorMessage('EmailJS failed to load. Please try again later.');
+      setIsLoading(false);
+      return;
+    }
+    
+    // Create an object matching EXACTLY the template parameters in EmailJS
+    // These need to match the template variables you've defined in your EmailJS template
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      to_name: "Inigashree", // The recipient name (you)
+      subject: formData.subject,
+      message: formData.message,
+      reply_to: formData.email,
+      // Include all parameters as they appear in your EmailJS template
+      name: formData.name, // Adding this as a backup in case template uses "name" instead
+      email: formData.email // Adding this as a backup in case template uses "email" instead
+    };
+    
+    // Log the parameters we're sending (for debugging)
+    console.log("Sending email with parameters:", templateParams);
+    
+    window.emailjs.send(
+      'service_xo0haiu', // Your service ID
+      'template_31yrh3f', // Your template ID
+      templateParams
     )
     .then((result) => {
       console.log('Email sent successfully:', result.text);
@@ -55,6 +95,7 @@ const Contact = () => {
     .catch((error) => {
       console.error('Failed to send email:', error);
       setIsError(true);
+      setErrorMessage('Failed to send email. Please try again later.');
       setIsLoading(false);
     });
   };
@@ -134,7 +175,14 @@ const Contact = () => {
               </div>
             ) : null}
             
-            <form onSubmit={handleSubmit}>
+            {isError ? (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+                <strong className="font-bold">Error!</strong>
+                <span className="block sm:inline"> {errorMessage || 'Something went wrong. Please try again.'}</span>
+              </div>
+            ) : null}
+            
+            <form ref={form} onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Name</label>
                 <input
@@ -189,9 +237,12 @@ const Contact = () => {
               
               <button 
                 type="submit" 
-                className="bg-blue-600 text-white px-6 py-3 rounded-md font-medium flex items-center justify-center hover:bg-blue-700 transition-colors w-full"
+                disabled={isLoading}
+                className={`${
+                  isLoading ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'
+                } text-white px-6 py-3 rounded-md font-medium flex items-center justify-center transition-colors w-full`}
               >
-                Send Message <Send className="ml-2" size={18} />
+                {isLoading ? 'Sending...' : 'Send Message'} <Send className="ml-2" size={18} />
               </button>
             </form>
           </div>
